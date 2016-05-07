@@ -1,0 +1,21 @@
+Create a page where users can play a number guessing game
+
+
+-When the page is loaded, a random number between 1 and 100 is created and stored as variable magicNumber
+
+-The user adds input in the form of a numeric digits between 1 and 100. If the user input is does not meet this criteria, the input is not accepted and the user is prompted to enter a guess in the proper format.
+
+-The user input is then compared to the magic number and feedback is printed and as follows:
+(subtract, need to use Math.abs) (remember parseInt)
+	•	If the difference is between 50-99, feedback = “very cold”
+	•	If the difference is between 49-30, feedback = “cold”
+	•	If the difference is between 29-10, feedback = “warmer”
+	•	If the difference is between 9-4, feedback = “hot”
+	•	If the difference is between 3-1, feedback = “very hot”
+	•	If the difference is 0, feedback = “You found the magic number!”
+
+-Each instance of user input is printed below and only unique guesses will be stored. If the user inputs the same guess twice, feedback will = “You already guessed that!”
+
+-After the user correctly finds the magic number, no more input will be accepted and the user will be prompted to “Start a new game.”
+
+-When the New Game button is clicked, all data generated from the previous game will be cleared and a new random number will be created.
