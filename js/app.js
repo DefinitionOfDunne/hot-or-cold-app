@@ -10,7 +10,7 @@ $(document).ready(function(){
 
 /*--- Display information modal box ---*/
   	$(".what").click(function(){
-    $(".overlay").fadeIn(1000);
+    	$(".overlay").fadeIn(1000);
 	});
 
  /*--- Hide information modal box ---*/
@@ -43,13 +43,13 @@ $(document).ready(function(){
 
 
 /*--- Display information modal box ---*/
-  		$(".what").click(function(){
+  	$(".what").click(function(){
     	$(".overlay").fadeIn(1000);
   	});
 
  /*--- Hide information modal box ---*/
-  		$("a.close").click(function(){
-  		$(".overlay").fadeOut(1000);
+  	$("a.close").click(function(){
+  	$(".overlay").fadeOut(1000);
  	});
 
 /*------New Game --------*/
@@ -66,7 +66,7 @@ $('.new').click(function() {
 /*--------Generate Guess Feedback----------*/
 	function generateNumber(){
 	magicNumber = Math.floor(Math.random()*100)+1;
-}
+	}
 	function generateFeedback() {
 		feedback.empty();
 		if(magicNumber === userGuess){
@@ -80,7 +80,7 @@ $('.new').click(function() {
 		} else {
 		feedback.append("<p>" + 'cold' + "</p>");
 		}
-	}
+		}
 
 
 
