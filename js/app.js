@@ -1,88 +1,83 @@
-//----- initialize variables
-var userGuess;
-var count = 0;
-var magicNumber = Math.floor(Math.random()*100)+1;
+$(document).ready(function () {
+	'use strict';
 
-/*--- page load -------*/
-$(document).ready(function(){
-	feedback = $('#feedback');
-	guessList = $('#guessList');
+	var count = 0;
+	var magicNumber = Math.floor(Math.random() * 100) + 1;
 
-/*--- Display information modal box ---*/
-  	$(".what").click(function(){
-    $(".overlay").fadeIn(1000);
+	/*--- Display information modal box ---*/
+	$(".what").click(function () {
+		$(".overlay").fadeIn(1000);
 	});
 
- /*--- Hide information modal box ---*/
-  	$("a.close").click(function(){
-  	$(".overlay").fadeOut(1000);
- 	});
-
+	/*--- Hide information modal box ---*/
+	$("a.close").click(function () {
+		$(".overlay").fadeOut(1000);
+	});
 
 	/* -----User Guessing Process------ */
-	$('#guessButton').click(function() {
-		userGuess = $('#userGuess').val();
-		userGuess = parseInt(userGuess);
 
-		if (isNaN(userGuess) || userGuess > 100) {
-		alert("COME ON MAN");
-		}
-
-		else {
-		count++;
-		console.log(count); 
-		$('span').text(count)
-		console.log (userGuess);
-		guessList.append("<li>" + userGuess + "</li>")
-		generateFeedback();
-		}
-	});
-});
-
-
-
-
-/*--- Display information modal box ---*/
-  		$(".what").click(function(){
-    	$(".overlay").fadeIn(1000);
-  	});
-
- /*--- Hide information modal box ---*/
-  		$("a.close").click(function(){
-  		$(".overlay").fadeOut(1000);
- 	});
-
-/*------New Game --------*/
-$('.new').click(function() {
-	feedback.empty();
-	feedback.append("<p>" + "Make your Guess!" + "</p>");
-	$('#userGuess').empty();
-	$(".guessBox").empty();
-	generateNumber();
-	count = 0;
-	$('span').text(count);
+	$('#guessButton').click(function () {
+		validateGuess($('#userGuess').val());
 	});
 
-/*--------Generate Guess Feedback----------*/
-	function generateNumber(){
-	magicNumber = Math.floor(Math.random()*100)+1;
-}
-	function generateFeedback() {
-		feedback.empty();
-		if(magicNumber === userGuess){
-		feedback.append("<p>" + 'You Win!' + "</p>");
-		} else if(Math.abs(magicNumber - userGuess) < 10){
-		feedback.append("<p>" + 'hot' + "</p>");
-		} else if(Math.abs(magicNumber - userGuess) < 20 && Math.abs(magicNumber - userGuess) > 9){
-		feedback.append("<p>" + 'Kinda hot' + "</p>");
-		} else if(Math.abs(magicNumber - userGuess) < 30 && Math.abs(magicNumber - userGuess) > 19){
-		feedback.append("<p>" + 'less than warm' + "</p>");
+	/*------New Game --------*/
+	$('.new').click(function () {
+		magicNumber = Math.floor(Math.random() * 100) + 1;
+		count = 0;
+
+		empty();
+		$('#feedback').append("<p>" + "Make your Guess!" + "</p>");
+		$('span').text(count);
+	});
+
+	function validateGuess(guess) {
+
+		if (isNaN(guess) || guess > 100 || !guess) {
+			alert("Choose number between 1-100");
 		} else {
-		feedback.append("<p>" + 'cold' + "</p>");
+			insertGuess(guess);
 		}
 	}
 
+	function insertGuess(guess) {
 
+		count++;
+		$('span').text(count);
+		$('#guessList').append("<li>" + guess + "</li>")
+		generateFeedback(guess);
+	}
 
+	function empty() {
 
+		$('#userGuess').empty();
+		$(".guessBox").empty();
+		$('#feedback').empty();
+
+	}
+
+	/*--------Generate Guess Feedback----------*/
+
+	function generateFeedback(guess) {
+
+		function append(item) {
+			$('#feedback').append('<p>' + item + '</p>');
+		}
+
+		var guess = parseInt(guess);
+		var difference = Math.abs(magicNumber - guess);
+
+		$('#feedback').empty();
+
+		if (magicNumber === guess) {
+			append('You Win!');
+		} else if (difference < 10) {
+			append('hot');
+		} else if (difference < 20 && difference > 9) {
+			append('Kinda hot');
+		} else if (difference < 30 && difference > 19) {
+			append('less than warm');
+		} else {
+			append('cold');
+		}
+	}
 
